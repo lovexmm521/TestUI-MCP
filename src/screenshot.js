@@ -15,7 +15,7 @@ export class ScreenshotCapture {
   }
 
   async initialize() {
-    if (!this.browser) {
+    if (!this.browser || !this.browser.connected) {
       this.browser = await puppeteer.launch({
         headless: this.options.headless,
         args: [
@@ -25,7 +25,6 @@ export class ScreenshotCapture {
           '--disable-accelerated-2d-canvas',
           '--no-first-run',
           '--no-zygote',
-          '--single-process',
           '--disable-gpu'
         ]
       });
